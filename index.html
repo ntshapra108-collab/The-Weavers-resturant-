@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Weaver's Rest | Loughrea, Co. Galway</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #c9a96e;
+            --accent: #8b7355;
+            --light: #faf8f5;
+            --cream: #f5f0e8;
+            --text: #2d2d2d;
+            --text-light: #6b6b6b;
+            --border: #e8e4dc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 600; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            padding: 0 5%;
+            transition: all 0.3s ease;
+        }
+        nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: var(--secondary); }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover { color: var(--secondary); }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1920&q=80') center/cover;
+            opacity: 0.15;
+        }
+        .hero-pattern {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(201,169,110,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(201,169,110,0.08) 0%, transparent 50%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 30px;
+        }
+        .hero-tag {
+            display: inline-block;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--secondary);
+            margin-bottom: 25px;
+            font-weight: 600;
+            border: 1px solid rgba(201,169,110,0.4);
+            padding: 8px 24px;
+            border-radius: 50px;
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            color: #fff;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+        .hero h1 em {
+            font-style: italic;
+            color: var(--secondary);
+        }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+        .hero-location {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
+            margin-bottom: 40px;
+        }
+        .hero-location i { color: var(--secondary); }
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--secondary);
+            color: #1a1a1a;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary);
+        }
+        .hero-cta:hover {
+            background: transparent;
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Section Styles */
+        section { padding: 100px 5%; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        .section-header h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about { background: var(--cream); }
+        .about-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .about-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+        .about-text p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+        .feature-item i {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            color: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .feature-item span {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--primary);
+        }
+        .about-image { position: relative; }
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px; left: -20px;
+            right: 20px; bottom: 20px;
+            border: 2px solid var(--secondary);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        /* Signature Dishes */
+        .signature-dishes { background: #fff; }
+        .dishes-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .dish-card {
+            background: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+        }
+        .dish-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+        }
+        .dish-image {
+            height: 280px;
+            overflow: hidden;
+            position: relative;
+        }
+        .dish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .dish-card:hover .dish-image img { transform: scale(1.1); }
+        .dish-badge {
+            position: absolute;
+            top: 15px; left: 15px;
+            background: var(--secondary);
+            color: #1a1a1a;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .dish-info { padding: 25px; }
+        .dish-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        .dish-info p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .dish-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        .full-menu-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 60px;
+            background: var(--primary);
+            color: #fff;
+            padding: 18px 45px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .full-menu-btn:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        /* Full Menu Modal */
+        .menu-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+        .menu-modal.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .menu-modal-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+        .menu-modal-header {
+            background: var(--primary);
+            color: #fff;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+        .menu-modal-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .menu-modal-header p { color: rgba(255,255,255,0.7); }
+        .close-menu {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-menu:hover {
+            background: rgba(255,255,255,0.2);
+            transform: rotate(90deg);
+        }
+        .menu-body { padding: 40px; }
+        .menu-category { margin-bottom: 50px; }
+        .menu-category:last-child { margin-bottom: 0; }
+        .menu-category-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+        .menu-category-title i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+        .menu-category-title h3 {
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px 0;
+            border-bottom: 1px dashed var(--border);
+            transition: all 0.3s;
+        }
+        .menu-item:hover {
+            background: var(--light);
+            margin: 0 -20px;
+            padding: 20px;
+            border-radius: 12px;
+            border-bottom: 1px dashed transparent;
+        }
+        .menu-item-details { flex: 1; }
+        .menu-item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .menu-item-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .menu-item-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--secondary);
+            font-weight: 700;
+            white-space: nowrap;
+            margin-left: 20px;
+        }
+        .menu-dietary {
+            display: inline-flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .dietary-tag {
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .dietary-tag.veg { background: #e8f5e9; color: #2e7d32; }
+        .dietary-tag.gf { background: #fff3e0; color: #e65100; }
+        .dietary-tag.spicy { background: #ffebee; color: #c62828; }
+
+        /* Gallery */
+        .gallery { background: var(--cream); }
+        .gallery-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .gallery-item:hover::after { opacity: 1; }
+        .gallery-item.tall { grid-row: span 2; }
+        .gallery-item.wide { grid-column: span 2; }
+
+        /* Reviews */
+        .reviews { background: #fff; }
+        .reviews-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .review-card {
+            background: var(--light);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+        .review-card::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            color: var(--secondary);
+            opacity: 0.3;
+            position: absolute;
+            top: 10px; left: 20px;
+            line-height: 1;
+        }
+        .review-stars {
+            color: #ffc107;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+        .review-text {
+            font-size: 1.05rem;
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .reviewer-avatar {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .reviewer-info h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 3px;
+        }
+        .reviewer-info span {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Info Section */
+        .info-section {
+            background: var(--primary);
+            color: #fff;
+            padding: 80px 5%;
+        }
+        .info-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+        .info-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        .info-card:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-5px);
+        }
+        .info-card i {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        .info-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .info-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 0;
+            background: var(--cream);
+        }
+        .map-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 5%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            align-items: stretch;
+            min-height: 500px;
+        }
+        .map-container {
+            position: relative;
+            height: 100%;
+            min-height: 400px;
+            border-radius: 20px 0 0 20px;
+            overflow: hidden;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(20%) contrast(1.1);
+        }
+        .map-info {
+            background: var(--primary);
+            color: #fff;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-radius: 0 20px 20px 0;
+        }
+        .map-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .map-info p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 15px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        .map-info .info-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: rgba(255,255,255,0.8);
+        }
+        .map-info .info-row i {
+            color: var(--secondary);
+            width: 20px;
+        }
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--secondary);
+            color: #1a1a1a;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 20px;
+            width: fit-content;
+        }
+        .map-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201,169,110,0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #111;
+            color: #fff;
+            padding: 80px 5% 30px;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        .footer-brand h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .footer-brand h2 span { color: var(--secondary); }
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        .social-links a {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        .social-links a:hover {
+            background: var(--secondary);
+            color: #1a1a1a;
+            transform: translateY(-3px);
+        }
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: var(--secondary);
+        }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+        .footer-links a:hover { color: var(--secondary); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .about-grid { grid-template-columns: 1fr; gap: 50px; }
+            .dishes-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .info-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .map-wrapper { grid-template-columns: 1fr; }
+            .map-container { border-radius: 20px 20px 0 0; min-height: 300px; }
+            .map-info { border-radius: 0 0 20px 20px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px; left: 0; right: 0;
+                background: #fff;
+                flex-direction: column;
+                padding: 30px;
+                gap: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .dishes-grid { grid-template-columns: 1fr; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-features { grid-template-columns: 1fr; }
+            section { padding: 60px 5%; }
+            .map-info { padding: 40px 30px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">The Weaver's <span>Rest</span></div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-tag">Est. Loughrea</div>
+            <h1>The Weaver's <em>Rest</em></h1>
+            <p class="hero-subtitle">Where tradition meets taste in the heart of County Galway</p>
+            <div class="hero-location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Main Street, Loughrea, Co. Galway, H62 NF82</span>
+            </div>
+            <a href="#menu" class="hero-cta">
+                <span>Explore Our Menu</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-text fade-in">
+                <h3>A Warm Welcome Awaits in Loughrea</h3>
+                <p>Located on the historic Main Street of Loughrea, The Weaver's Rest has become a beloved gathering place for locals and visitors alike. Our cafe celebrates the rich culinary heritage of County Galway with a modern touch.</p>
+                <p>Whether you're seeking a hearty Full Irish Breakfast to start your day, a fresh Caesar Salad for lunch, or simply a perfect cup of Bewley's coffee with friends, you'll find it here, served with genuine Irish hospitality.</p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <i class="fas fa-wheelchair"></i>
+                        <span>Fully Accessible</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-utensils"></i>
+                        <span>Dine-in & Outdoor</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-coffee"></i>
+                        <span>Great Coffee</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-mug-hot"></i>
+                        <span>Tea Selection</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image fade-in">
+                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&q=80" alt="The Weaver's Rest Cafe Interior">
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Dishes -->
+    <section class="signature-dishes" id="menu">
+        <div class="section-header fade-in">
+            <h2>Signature Dishes</h2>
+            <div class="divider"></div>
+            <p>Handcrafted with care, served with pride. Our most loved creations.</p>
+        </div>
+
+        <div class="dishes-grid">
+            <div class="dish-card fade-in">
+                <div class="dish-image">
+                    <img src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/01/08/FNK_FULL_IRISH_BREAKFAST_H_f_s4x3.jpg.rend.hgtvcom.826.620.suffix/1578597007919.jpeg" alt="Full Irish Breakfast">
+                    <span class="dish-badge">Chef's Choice</span>
+                </div>
+                <div class="dish-info">
+                    <h3>Full Irish Breakfast</h3>
+                    <p>Sausages, bacon, black & white pudding, eggs, beans, hash browns, mushrooms, tomato & toast</p>
+                    <div class="dish-price">EUR 14.50</div>
+                </div>
+            </div>
+
+            <div class="dish-card fade-in">
+                <div class="dish-image">
+                    <img src="https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/6d7ad405-504b-01f4-7bb4-ab4bd9bc8e29.jpg" alt="Chicken Caesar Salad">
+                    <span class="dish-badge">Popular</span>
+                </div>
+                <div class="dish-info">
+                    <h3>Chicken Caesar Salad</h3>
+                    <p>Grilled chicken breast, crisp romaine, parmesan, croutons & our house Caesar dressing</p>
+                    <div class="dish-price">EUR 12.95</div>
+                </div>
+            </div>
+
+            <div class="dish-card fade-in">
+                <div class="dish-image">
+                    <img src="https://www.apinchofhealthy.com/wp-content/uploads/2022/07/club-sandwich-recipe.jpg" alt="Club Sandwich">
+                    <span class="dish-badge">Lunch Favourite</span>
+                </div>
+                <div class="dish-info">
+                    <h3>Club Sandwich</h3>
+                    <p>Triple-decker with turkey, ham, bacon, lettuce, tomato & mayo. Served with crisps</p>
+                    <div class="dish-price">EUR 11.50</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="full-menu-btn" id="openMenuBtn">
+                <span>View Full Menu</span>
+                <i class="fas fa-book-open"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Full Menu Modal -->
+    <div class="menu-modal" id="menuModal">
+        <div class="menu-modal-content">
+            <div class="menu-modal-header">
+                <button class="close-menu" id="closeMenuBtn"><i class="fas fa-times"></i></button>
+                <h2>Our Menu</h2>
+                <p>Fresh, local, and made with love</p>
+            </div>
+            <div class="menu-body">
+                <!-- Breakfast -->
+                <div class="menu-category">
+                    <div class="menu-category-title">
+                        <i class="fas fa-sun"></i>
+                        <h3>Breakfast</h3>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Full Irish Breakfast</div>
+                            <div class="menu-item-desc">Sausages, bacon, black & white pudding, fried eggs, baked beans, hash browns, mushrooms, grilled tomato & toast</div>
+                        </div>
+                        <div class="menu-item-price">EUR 14.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Small Irish Breakfast</div>
+                            <div class="menu-item-desc">Sausage, bacon, egg, beans, hash brown & toast</div>
+                        </div>
+                        <div class="menu-item-price">EUR 10.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Eggs Benedict</div>
+                            <div class="menu-item-desc">Poached eggs on toasted muffin with ham & hollandaise sauce</div>
+                        </div>
+                        <div class="menu-item-price">EUR 11.95</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Pancakes & Maple Syrup</div>
+                            <div class="menu-item-desc">Three fluffy pancakes with butter & pure maple syrup</div>
+                            <div class="menu-dietary"><span class="dietary-tag veg">Vegetarian</span></div>
+                        </div>
+                        <div class="menu-item-price">EUR 9.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Smoked Salmon & Scrambled Eggs</div>
+                            <div class="menu-item-desc">Creamy scrambled eggs with Irish smoked salmon on sourdough</div>
+                        </div>
+                        <div class="menu-item-price">EUR 13.50</div>
+                    </div>
+                </div>
+
+                <!-- Lunch -->
+                <div class="menu-category">
+                    <div class="menu-category-title">
+                        <i class="fas fa-hamburger"></i>
+                        <h3>Lunch</h3>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Chicken Caesar Salad</div>
+                            <div class="menu-item-desc">Grilled chicken, crisp romaine, parmesan shavings, croutons & house Caesar dressing</div>
+                        </div>
+                        <div class="menu-item-price">EUR 12.95</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Club Sandwich</div>
+                            <div class="menu-item-desc">Triple-decker with turkey, ham, bacon, lettuce, tomato & mayo. Served with crisps</div>
+                        </div>
+                        <div class="menu-item-price">EUR 11.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">BLT Sandwich</div>
+                            <div class="menu-item-desc">Crispy bacon, fresh lettuce, tomato & mayo on toasted sourdough</div>
+                        </div>
+                        <div class="menu-item-price">EUR 9.95</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Soup of the Day</div>
+                            <div class="menu-item-desc">Fresh homemade soup served with crusty bread & butter</div>
+                            <div class="menu-dietary"><span class="dietary-tag veg">Vegetarian</span></div>
+                        </div>
+                        <div class="menu-item-price">EUR 7.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Chicken & Avocado Salad</div>
+                            <div class="menu-item-desc">Grilled chicken, avocado, mixed leaves, cherry tomatoes, red onion & balsamic glaze</div>
+                        </div>
+                        <div class="menu-item-price">EUR 13.95</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Fish & Chips</div>
+                            <div class="menu-item-desc">Beer-battered fresh cod with chunky chips, mushy peas & tartare sauce</div>
+                        </div>
+                        <div class="menu-item-price">EUR 15.50</div>
+                    </div>
+                </div>
+
+                <!-- Hot Drinks -->
+                <div class="menu-category">
+                    <div class="menu-category-title">
+                        <i class="fas fa-coffee"></i>
+                        <h3>Hot Drinks</h3>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Bewley's Coffee</div>
+                            <div class="menu-item-desc">Ireland's finest coffee - Americano, Latte, Cappuccino or Flat White</div>
+                        </div>
+                        <div class="menu-item-price">EUR 3.20</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Espresso</div>
+                            <div class="menu-item-desc">Double shot of rich, aromatic espresso</div>
+                        </div>
+                        <div class="menu-item-price">EUR 2.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Hot Chocolate</div>
+                            <div class="menu-item-desc">Creamy Belgian hot chocolate with whipped cream & marshmallows</div>
+                        </div>
+                        <div class="menu-item-price">EUR 3.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Selection of Teas</div>
+                            <div class="menu-item-desc">Barry's Tea, Earl Grey, Green Tea, Peppermint, Chamomile & more</div>
+                        </div>
+                        <div class="menu-item-price">EUR 2.80</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Irish Coffee</div>
+                            <div class="menu-item-desc">Coffee with Irish whiskey, brown sugar & fresh cream</div>
+                        </div>
+                        <div class="menu-item-price">EUR 7.50</div>
+                    </div>
+                </div>
+
+                <!-- Cold Drinks -->
+                <div class="menu-category">
+                    <div class="menu-category-title">
+                        <i class="fas fa-glass-whiskey"></i>
+                        <h3>Cold Drinks</h3>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Iced Coffee</div>
+                            <div class="menu-item-desc">Chilled Bewley's coffee over ice with milk</div>
+                        </div>
+                        <div class="menu-item-price">EUR 3.80</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Fresh Orange Juice</div>
+                            <div class="menu-item-desc">100% freshly squeezed orange juice</div>
+                        </div>
+                        <div class="menu-item-price">EUR 3.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Soft Drinks</div>
+                            <div class="menu-item-desc">Coca-Cola, Diet Coke, 7UP, Fanta, Sprite</div>
+                        </div>
+                        <div class="menu-item-price">EUR 2.80</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Mineral Water</div>
+                            <div class="menu-item-desc">Still or sparkling</div>
+                        </div>
+                        <div class="menu-item-price">EUR 2.20</div>
+                    </div>
+                </div>
+
+                <!-- Desserts -->
+                <div class="menu-category">
+                    <div class="menu-category-title">
+                        <i class="fas fa-birthday-cake"></i>
+                        <h3>Desserts & Cakes</h3>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Oreo Cheesecake</div>
+                            <div class="menu-item-desc">Creamy Oreo cheesecake with chocolate cookie base & whipped cream</div>
+                        </div>
+                        <div class="menu-item-price">EUR 6.95</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Homemade Scones</div>
+                            <div class="menu-item-desc">Freshly baked daily with jam, cream & butter</div>
+                        </div>
+                        <div class="menu-item-price">EUR 4.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Chocolate Fudge Cake</div>
+                            <div class="menu-item-desc">Rich chocolate cake with warm fudge centre, served with vanilla ice cream</div>
+                        </div>
+                        <div class="menu-item-price">EUR 7.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Apple Tart & Custard</div>
+                            <div class="menu-item-desc">Warm apple tart with vanilla custard</div>
+                        </div>
+                        <div class="menu-item-price">EUR 6.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Selection of Tray Bakes</div>
+                            <div class="menu-item-desc">Ask your server about today's selection of fresh tray bakes</div>
+                        </div>
+                        <div class="menu-item-price">EUR 3.95</div>
+                    </div>
+                </div>
+
+                <!-- Kids Menu -->
+                <div class="menu-category">
+                    <div class="menu-category-title">
+                        <i class="fas fa-child"></i>
+                        <h3>Little Weavers</h3>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Mini Breakfast</div>
+                            <div class="menu-item-desc">Sausage, egg, beans & toast</div>
+                        </div>
+                        <div class="menu-item-price">EUR 7.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Chicken Nuggets & Chips</div>
+                            <div class="menu-item-desc">Crispy chicken nuggets with chips & ketchup</div>
+                        </div>
+                        <div class="menu-item-price">EUR 8.50</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-details">
+                            <div class="menu-item-name">Pancakes & Syrup</div>
+                            <div class="menu-item-desc">Two pancakes with maple syrup</div>
+                        </div>
+                        <div class="menu-item-price">EUR 6.50</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+        <div class="section-header fade-in">
+            <h2>Our Kitchen</h2>
+            <div class="divider"></div>
+            <p>A glimpse of what awaits you at The Weaver's Rest</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item wide fade-in">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Cafe atmosphere">
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2020/01/08/FNK_FULL_IRISH_BREAKFAST_H_f_s4x3.jpg.rend.hgtvcom.826.620.suffix/1578597007919.jpeg" alt="Full Irish">
+            </div>
+            <div class="gallery-item tall fade-in">
+                <img src="https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/6d7ad405-504b-01f4-7bb4-ab4bd9bc8e29.jpg" alt="Salad">
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://www.apinchofhealthy.com/wp-content/uploads/2022/07/club-sandwich-recipe.jpg" alt="Sandwich">
+            </div>
+            <div class="gallery-item wide fade-in">
+                <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80" alt="Coffee and cake">
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&q=80" alt="Interior">
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews" id="reviews">
+        <div class="section-header fade-in">
+            <h2>What Our Guests Say</h2>
+            <div class="divider"></div>
+            <p>Real reviews from real people who love The Weaver's Rest</p>
+        </div>
+
+        <div class="reviews-grid">
+            <div class="review-card fade-in">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">My favourite cafe in Loughrea. The staff are genuinely some of the loveliest people and the atmosphere always feels warm and welcoming. I normally never leave reviews, but this place deserves it.</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar">MR</div>
+                    <div class="reviewer-info">
+                        <h4>Melanca Rebello</h4>
+                        <span>Local Guest</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-card fade-in">
+                <div class="review-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">As you can see, 5 stars for everything. Tasty breakfast and coffee... I'm just gonna say, the writing on the wall justified the taste of the coffee.</p>
+                <div class="reviewer">
+                    <div class="reviewer-avatar">SM</div>
+                    <div class="reviewer-info">
+                        <h4>Snjezana Mocibob</h4>
+                        <span>Local Guide</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section" id="contact">
+        <div class="info-grid">
+            <div class="info-card fade-in">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Find Us</h3>
+                <p>Main Street<br>Loughrea, Co. Galway<br>H62 NF82, Ireland</p>
+            </div>
+            <div class="info-card fade-in">
+                <i class="fas fa-clock"></i>
+                <h3>Opening Hours</h3>
+                <p>Mon - Sat: 9:00 AM - 5:00 PM<br>Sun: 10:00 AM - 4:00 PM</p>
+            </div>
+            <div class="info-card fade-in">
+                <i class="fas fa-phone"></i>
+                <h3>Call Us</h3>
+                <p>+353 87 712 5050<br>Walk-ins welcome</p>
+            </div>
+            <div class="info-card fade-in">
+                <i class="fas fa-euro-sign"></i>
+                <h3>Price Range</h3>
+                <p>EUR 10 - EUR 20 per person<br>Great value for quality</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-wrapper">
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2388.1234567890123!2d-8.567123456789012!3d53.19612345678901!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDExJzQ2LjAiTiA4wrAzNCcwMS42Ilc!5e0!3m2!1sen!2sie!4v1234567890123!5m2!1sen!2sie" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="map-info">
+                <h3>Visit The Weaver's Rest</h3>
+                <p>Located right on Main Street in the heart of Loughrea. Plenty of parking nearby and wheelchair accessible entrance.</p>
+                <div class="info-row">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Main St, Loughrea, Co. Galway</span>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-phone"></i>
+                    <span>+353 87 712 5050</span>
+                </div>
+                <div class="info-row">
+                    <i class="fas fa-clock"></i>
+                    <span>Open Mon-Sat 9AM-5PM</span>
+                </div>
+                <a href="https://maps.app.goo.gl/fHzXK2DFCjhzx7P68" target="_blank" class="map-btn">
+                    <i class="fas fa-directions"></i>
+                    Get Directions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>The Weaver's <span>Rest</span></h2>
+                <p>A warm, welcoming cafe in the heart of Loughrea, serving great food, excellent coffee, and genuine Irish hospitality since day one.</p>
+                <div class="social-links">
+                    <a href="https://m.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="TripAdvisor"><i class="fab fa-tripadvisor"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Dine-in</a></li>
+                    <li><a href="#">Outdoor Seating</a></li>
+                    <li><a href="#">Wheelchair Accessible</a></li>
+                    <li><a href="#">Private Events</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+353877125050">+353 87 712 5050</a></li>
+                    <li><a href="https://maps.app.goo.gl/fHzXK2DFCjhzx7P68" target="_blank">Main St, Loughrea</a></li>
+                    <li><a href="#">Co. Galway, Ireland</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; The Weaver's Rest. All rights reserved. Crafted with care in Loughrea, Co. Galway.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Menu Modal
+        const openMenuBtn = document.getElementById('openMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const menuModal = document.getElementById('menuModal');
+
+        openMenuBtn.addEventListener('click', () => {
+            menuModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            menuModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        menuModal.addEventListener('click', (e) => {
+            if (e.target === menuModal) {
+                menuModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => fadeObserver.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
